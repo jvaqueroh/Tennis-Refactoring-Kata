@@ -20,7 +20,6 @@ namespace Tennis
         public string GetScore()
         {
             string score = "";
-            var tempScore = 0;
             if (player1Score == player2Score)
             {
                 switch (player1Score)
@@ -37,7 +36,6 @@ namespace Tennis
                     default:
                         score = "Deuce";
                         break;
-
                 }
             }
             else if (player1Score >= 4 || player2Score >= 4)
@@ -52,6 +50,7 @@ namespace Tennis
             {
                 for (var i = 1; i < 3; i++)
                 {
+                    var tempScore = 0;
                     if (i == 1) tempScore = player1Score;
                     else { score += "-"; tempScore = player2Score; }
                     switch (tempScore)
