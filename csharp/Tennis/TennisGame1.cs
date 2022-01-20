@@ -78,24 +78,10 @@ namespace Tennis
 
         private string GetScoreForEqual()
         {
-            string score;
-            switch (player1Score)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-            }
-
-            return score;
+            if (player1Score == 0) return "Love-All";
+            if (player1Score == 1) return "Fifteen-All";
+            if (player1Score == 2) return "Thirty-All";
+            return "Deuce";
         }
     }
 }
