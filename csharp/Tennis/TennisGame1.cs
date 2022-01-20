@@ -47,23 +47,18 @@ namespace Tennis
                     tempScore = player2Score;
                 }
 
-                score = ConvertoScoreToText(score, tempScore);
+                score += ConvertoScoreToText(tempScore);
             }
 
             return score;
         }
 
-        private static string ConvertoScoreToText(string score, int tempScore)
+        private static string ConvertoScoreToText(int tempScore)
         {
-            if (tempScore == 0)
-                score += "Love";
-            else if (tempScore == 1)
-                score += "Fifteen";
-            else if (tempScore == 2)
-                score += "Thirty";
-            else if (tempScore == 3) score += "Forty";
-
-            return score;
+            if (tempScore == 0) return "Love";
+            if (tempScore == 1) return "Fifteen";
+            if (tempScore == 2) return "Thirty";
+            return "Forty";
         }
 
         private string GetScoreForLateGame()
