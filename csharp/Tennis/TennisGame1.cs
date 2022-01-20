@@ -69,24 +69,11 @@ namespace Tennis
 
         private string GetScoreForLateGame()
         {
-            string score;
             var minusResult = player1Score - player2Score;
-            switch (minusResult)
-            {
-                case 1:
-                    score = "Advantage player1";
-                    break;
-                case -1:
-                    score = "Advantage player2";
-                    break;
-                default:
-                {
-                    if (minusResult >= 2) score = "Win for player1";
-                    else score = "Win for player2";
-                    break;
-                }
-            }
-            return score;
+            if (minusResult == 1)  return "Advantage player1";
+            if (minusResult == -1) return "Advantage player2";
+            if (minusResult >= 2)  return "Win for player1";
+            return "Win for player2";
         }
 
         private string GetScoreForEqual()
