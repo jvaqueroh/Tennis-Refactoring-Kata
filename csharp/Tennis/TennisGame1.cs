@@ -38,19 +38,10 @@ namespace Tennis
         private string GetScoreWhenEarlyGame()
         {
             string score = "";
-            for (var i = 1; i < 3; i++)
-            {
-                var tempScore = 0;
-                if (i == 1) tempScore = player1Score;
-                else
-                {
-                    score += "-";
-                    tempScore = player2Score;
-                }
-
-                score += ConvertoScoreToText(tempScore);
-            }
-
+            score += ConvertoScoreToText(player1Score);
+            score += "-";
+            score += ConvertoScoreToText(player2Score);
+            
             return score;
         }
 
