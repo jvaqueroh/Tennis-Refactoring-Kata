@@ -30,13 +30,14 @@ namespace Tennis
             }
             else
             {
-                score = GetScoreWhenEarlyGame(score);
+                score = GetScoreWhenEarlyGame();
             }
             return score;
         }
 
-        private string GetScoreWhenEarlyGame(string score)
+        private string GetScoreWhenEarlyGame()
         {
+            string score = "";
             for (var i = 1; i < 3; i++)
             {
                 var tempScore = 0;
