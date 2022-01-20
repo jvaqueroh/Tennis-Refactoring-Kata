@@ -37,12 +37,7 @@ namespace Tennis
 
         private string GetScoreWhenEarlyGame()
         {
-            string score = "";
-            score += ConvertoScoreToText(player1Score);
-            score += "-";
-            score += ConvertoScoreToText(player2Score);
-            
-            return score;
+            return $"{ConvertoScoreToText(player1Score)}-{ConvertoScoreToText(player2Score)}";
         }
 
         private static string ConvertoScoreToText(int tempScore)
