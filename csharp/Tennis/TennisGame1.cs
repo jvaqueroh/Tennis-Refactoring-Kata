@@ -30,17 +30,17 @@ namespace Tennis
             }
             else
             {
-                score = GetScoreWhenEarlyGame();
+                score = GetScoreForEarlyGame();
             }
             return score;
         }
 
-        private string GetScoreWhenEarlyGame()
+        private string GetScoreForEarlyGame()
         {
-            return $"{ConvertoScoreToText(player1Score)}-{ConvertoScoreToText(player2Score)}";
+            return $"{ConvertScoreToText(player1Score)}-{ConvertScoreToText(player2Score)}";
         }
 
-        private static string ConvertoScoreToText(int tempScore)
+        private static string ConvertScoreToText(int tempScore)
         {
             if (tempScore == 0) return "Love";
             if (tempScore == 1) return "Fifteen";
