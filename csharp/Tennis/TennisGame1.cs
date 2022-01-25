@@ -19,20 +19,11 @@ namespace Tennis
 
         public string GetScore()
         {
-            string score = "";
-            if (player1Score == player2Score)
-            {
-                score = GetScoreForEqual();
-            }
-            else if (player1Score >= 4 || player2Score >= 4)
-            {
-                score = GetScoreForLateGame();
-            }
-            else
-            {
-                score = GetScoreForEarlyGame();
-            }
-            return score;
+            if (player1Score == player2Score) 
+                return GetScoreForEqual();
+            if (player1Score >= 4 || player2Score >= 4) 
+                return GetScoreForLateGame();
+            return GetScoreForEarlyGame();
         }
 
         private string GetScoreForEarlyGame()
