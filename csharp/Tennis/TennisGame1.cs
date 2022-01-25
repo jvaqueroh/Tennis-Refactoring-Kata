@@ -4,6 +4,7 @@ namespace Tennis
     {
         private int player1Score = 0;
         private int player2Score = 0;
+        private const int MinLateGamePoints = 4;
 
         public TennisGame1()
         {
@@ -21,7 +22,7 @@ namespace Tennis
         {
             if (player1Score == player2Score) 
                 return GetScoreForEqual();
-            if (player1Score >= 4 || player2Score >= 4) 
+            if (player1Score >= MinLateGamePoints || player2Score >= MinLateGamePoints) 
                 return GetScoreForLateGame();
             return GetScoreForEarlyGame();
         }
