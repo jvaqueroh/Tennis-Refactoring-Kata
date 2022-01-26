@@ -3,7 +3,7 @@ namespace Tennis
     public class PlayerScore
     {
         private const int MinLateGamePoints = 4;
-        public int value = 0;
+        private int value = 0;
 
         public string GetScoreForEarlyGame(PlayerScore other)
         {
@@ -53,7 +53,6 @@ namespace Tennis
 
     public class TennisGame1 : ITennisGame
     {
-        //TODO - Extract class for player Score and move there the related logic
         private readonly PlayerScore player1Score;
         private readonly PlayerScore player2Score;
 
