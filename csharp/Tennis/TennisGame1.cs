@@ -38,6 +38,11 @@ namespace Tennis
         {
             this.value += 1;
         }
+
+        public bool Equals(PlayerScore other)
+        {
+            return this.value == other.value;
+        }
     }
 
     public class TennisGame1 : ITennisGame
@@ -63,7 +68,7 @@ namespace Tennis
 
         public string GetScore()
         {
-            if (player1Score.value == player2Score.value) 
+            if (player1Score.Equals(player2Score)) 
                 return player1Score.GetScoreForEqual();
             if (player1Score.value >= MinLateGamePoints || player2Score.value >= MinLateGamePoints) 
                 return player1Score.GetScoreForLateGame(player2Score);
