@@ -1,5 +1,30 @@
-namespace Tennis
+namespace Tennis 
 {
+    public class TennisGame1 : ITennisGame {
+        private readonly PlayerScore player1Score;
+        private readonly PlayerScore player2Score;
+
+        public TennisGame1() {
+            player1Score = new PlayerScore();
+            player2Score = new PlayerScore();
+        }
+
+        public void WonPoint(string playerName) {
+            if (playerName == "player1")
+                player1Score.AddPoint();
+            else
+                player2Score.AddPoint();
+        }
+
+        public string GetScore() {
+            if (player1Score.Equals(player2Score))
+                return player1Score.GetScoreForEqual();
+            if (player1Score.IsLateGame() || player2Score.IsLateGame())
+                return player1Score.GetScoreForLateGame(player2Score);
+            return player1Score.GetScoreForEarlyGame(player2Score);
+        }
+    }
+
     public class PlayerScore
     {
         private const int MinLateGamePoints = 4;
@@ -8,14 +33,6 @@ namespace Tennis
         public string GetScoreForEarlyGame(PlayerScore other)
         {
             return $"{ConvertScoreToText(value)}-{ConvertScoreToText(other.value)}";
-        }
-
-        private static string ConvertScoreToText(int tempScore)
-        {
-            if (tempScore == 0) return "Love";
-            if (tempScore == 1) return "Fifteen";
-            if (tempScore == 2) return "Thirty";
-            return "Forty";
         }
 
         public string GetScoreForLateGame(PlayerScore other)
@@ -49,34 +66,12 @@ namespace Tennis
         {
             return this.value >= MinLateGamePoints;
         }
-    }
 
-    public class TennisGame1 : ITennisGame
-    {
-        private readonly PlayerScore player1Score;
-        private readonly PlayerScore player2Score;
-
-        public TennisGame1()
-        {
-            player1Score = new PlayerScore();
-            player2Score = new PlayerScore();
-        }
-
-        public void WonPoint(string playerName)
-        {
-            if (playerName == "player1")
-                player1Score.AddPoint();
-            else
-                player2Score.AddPoint();
-        }
-
-        public string GetScore()
-        {
-            if (player1Score.Equals(player2Score)) 
-                return player1Score.GetScoreForEqual();
-            if (player1Score.IsLateGame() || player2Score.IsLateGame()) 
-                return player1Score.GetScoreForLateGame(player2Score);
-            return player1Score.GetScoreForEarlyGame(player2Score);
+        private static string ConvertScoreToText(int tempScore) {
+            if (tempScore == 0) return "Love";
+            if (tempScore == 1) return "Fifteen";
+            if (tempScore == 2) return "Thirty";
+            return "Forty";
         }
     }
 }
