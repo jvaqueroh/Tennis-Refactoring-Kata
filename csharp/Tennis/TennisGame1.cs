@@ -2,6 +2,7 @@ namespace Tennis
 {
     public class PlayerScore
     {
+        private const int MinLateGamePoints = 4;
         public int value = 0;
 
         public string GetScoreForEarlyGame(PlayerScore other)
@@ -43,6 +44,11 @@ namespace Tennis
         {
             return this.value == other.value;
         }
+
+        public bool IsLateGame()
+        {
+            return this.value >= MinLateGamePoints;
+        }
     }
 
     public class TennisGame1 : ITennisGame
@@ -50,7 +56,6 @@ namespace Tennis
         //TODO - Extract class for player Score and move there the related logic
         private readonly PlayerScore player1Score;
         private readonly PlayerScore player2Score;
-        private const int MinLateGamePoints = 4;
 
         public TennisGame1()
         {
@@ -70,7 +75,7 @@ namespace Tennis
         {
             if (player1Score.Equals(player2Score)) 
                 return player1Score.GetScoreForEqual();
-            if (player1Score.value >= MinLateGamePoints || player2Score.value >= MinLateGamePoints) 
+            if (player1Score.IsLateGame() || player2Score.IsLateGame()) 
                 return player1Score.GetScoreForLateGame(player2Score);
             return player1Score.GetScoreForEarlyGame(player2Score);
         }
