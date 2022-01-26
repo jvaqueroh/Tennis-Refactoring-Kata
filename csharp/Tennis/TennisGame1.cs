@@ -2,13 +2,7 @@ namespace Tennis
 {
     public class PlayerScore
     {
-        private TennisGame1 tennisGame1;
         public int value = 0;
-
-        public PlayerScore(TennisGame1 tennisGame1)
-        {
-            this.tennisGame1 = tennisGame1;
-        }
 
         public string GetScoreForEarlyGame(PlayerScore other)
         {
@@ -39,6 +33,11 @@ namespace Tennis
             if (value == 2) return "Thirty-All";
             return "Deuce";
         }
+
+        public void AddPoint()
+        {
+            this.value += 1;
+        }
     }
 
     public class TennisGame1 : ITennisGame
@@ -50,16 +49,16 @@ namespace Tennis
 
         public TennisGame1()
         {
-            player1Score = new PlayerScore(this);
-            player2Score = new PlayerScore(this);
+            player1Score = new PlayerScore();
+            player2Score = new PlayerScore();
         }
 
         public void WonPoint(string playerName)
         {
             if (playerName == "player1")
-                player1Score.value += 1;
+                player1Score.AddPoint();
             else
-                player2Score.value += 1;
+                player2Score.AddPoint();
         }
 
         public string GetScore()
