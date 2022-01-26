@@ -1,35 +1,18 @@
 namespace Tennis
 {
-    public class TennisGame1 : ITennisGame
+    public class PlayerScore
     {
-        private int player1Score = 0;
-        private int player2Score = 0;
-        private const int MinLateGamePoints = 4;
+        private TennisGame1 tennisGame1;
+        public int value = 0;
 
-        public TennisGame1()
+        public PlayerScore(TennisGame1 tennisGame1)
         {
+            this.tennisGame1 = tennisGame1;
         }
 
-        public void WonPoint(string playerName)
+        public string GetScoreForEarlyGame(PlayerScore other)
         {
-            if (playerName == "player1")
-                player1Score += 1;
-            else
-                player2Score += 1;
-        }
-
-        public string GetScore()
-        {
-            if (player1Score == player2Score) 
-                return GetScoreForEqual();
-            if (player1Score >= MinLateGamePoints || player2Score >= MinLateGamePoints) 
-                return GetScoreForLateGame();
-            return GetScoreForEarlyGame();
-        }
-
-        private string GetScoreForEarlyGame()
-        {
-            return $"{ConvertScoreToText(player1Score)}-{ConvertScoreToText(player2Score)}";
+            return $"{ConvertScoreToText(value)}-{ConvertScoreToText(other.value)}";
         }
 
         private static string ConvertScoreToText(int tempScore)
@@ -40,21 +23,52 @@ namespace Tennis
             return "Forty";
         }
 
-        private string GetScoreForLateGame()
+        public string GetScoreForLateGame(PlayerScore other)
         {
-            var minusResult = player1Score - player2Score;
+            var minusResult = value - other.value;
             if (minusResult == 1)  return "Advantage player1";
             if (minusResult == -1) return "Advantage player2";
             if (minusResult >= 2)  return "Win for player1";
             return "Win for player2";
         }
 
-        private string GetScoreForEqual()
+        public string GetScoreForEqual()
         {
-            if (player1Score == 0) return "Love-All";
-            if (player1Score == 1) return "Fifteen-All";
-            if (player1Score == 2) return "Thirty-All";
+            if (value == 0) return "Love-All";
+            if (value == 1) return "Fifteen-All";
+            if (value == 2) return "Thirty-All";
             return "Deuce";
+        }
+    }
+
+    public class TennisGame1 : ITennisGame
+    {
+        //TODO - Extract class for player Score and move there the related logic
+        private readonly PlayerScore player1Score;
+        private readonly PlayerScore player2Score;
+        private const int MinLateGamePoints = 4;
+
+        public TennisGame1()
+        {
+            player1Score = new PlayerScore(this);
+            player2Score = new PlayerScore(this);
+        }
+
+        public void WonPoint(string playerName)
+        {
+            if (playerName == "player1")
+                player1Score.value += 1;
+            else
+                player2Score.value += 1;
+        }
+
+        public string GetScore()
+        {
+            if (player1Score.value == player2Score.value) 
+                return player1Score.GetScoreForEqual();
+            if (player1Score.value >= MinLateGamePoints || player2Score.value >= MinLateGamePoints) 
+                return player1Score.GetScoreForLateGame(player2Score);
+            return player1Score.GetScoreForEarlyGame(player2Score);
         }
     }
 }
