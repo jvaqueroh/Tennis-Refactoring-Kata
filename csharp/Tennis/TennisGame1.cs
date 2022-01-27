@@ -1,12 +1,15 @@
 namespace Tennis 
 {
+
     public class TennisGame1 : ITennisGame {
         private readonly PlayerScore player1Score;
         private readonly PlayerScore player2Score;
+        private readonly Scoreboard scoreboard;
 
         public TennisGame1() {
             player1Score = new PlayerScore();
             player2Score = new PlayerScore();
+            scoreboard = new Scoreboard();
         }
 
         public void WonPoint(string playerName) {
@@ -16,7 +19,15 @@ namespace Tennis
                 player2Score.AddPoint();
         }
 
-        public string GetScore() {
+        public string GetScore()
+        {
+            return scoreboard.GetScore(player1Score, player2Score);
+        }
+    }
+    public class Scoreboard
+    {
+        public string GetScore(PlayerScore player1Score, PlayerScore player2Score)
+        {
             if (player1Score.Equals(player2Score))
                 return player1Score.GetScoreForEqual();
             if (player1Score.IsLateGame() || player2Score.IsLateGame())
