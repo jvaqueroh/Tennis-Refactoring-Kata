@@ -9,7 +9,7 @@ namespace Tennis
         public TennisGame1() {
             player1Score = new PlayerScore();
             player2Score = new PlayerScore();
-            scoreboard = new Scoreboard();
+            scoreboard = new Scoreboard(player1Score, player2Score);
         }
 
         public void WonPoint(string playerName) {
@@ -21,12 +21,21 @@ namespace Tennis
 
         public string GetScore()
         {
-            return scoreboard.GetScore(player1Score, player2Score);
+            return scoreboard.GetScore();
         }
     }
     public class Scoreboard
     {
-        public string GetScore(PlayerScore player1Score, PlayerScore player2Score)
+        private readonly PlayerScore player1Score;
+        private readonly PlayerScore player2Score;
+
+        public Scoreboard(PlayerScore player1Score, PlayerScore player2Score)
+        {
+            this.player2Score = player2Score;
+            this.player1Score = player1Score;
+        }
+
+        public string GetScore()
         {
             if (player1Score.Equals(player2Score))
                 return player1Score.GetScoreForEqual();
