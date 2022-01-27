@@ -39,7 +39,7 @@ namespace Tennis
         {
             if (player1Score.Equals(player2Score))
                 return player1Score.GetScoreForEqual();
-            if (player1Score.IsLateGame() || player2Score.IsLateGame())
+            if (player1Score.IsInLateGame() || player2Score.IsInLateGame())
                 return player1Score.GetScoreForLateGame(player2Score);
             return player1Score.GetScoreForEarlyGame(player2Score);
         }
@@ -82,7 +82,7 @@ namespace Tennis
             return this.value == other.value;
         }
 
-        public bool IsLateGame()
+        public bool IsInLateGame()
         {
             return this.value >= MinLateGamePoints;
         }
