@@ -1,5 +1,4 @@
-namespace Tennis 
-{
+namespace Tennis {
 
     public class TennisGame1 : ITennisGame {
         private readonly PlayerScore player1Score;
@@ -12,35 +11,30 @@ namespace Tennis
             scoreboard = new Scoreboard(player1Score, player2Score);
         }
 
-        public void WonPoint(string playerName)
-        {
+        public void WonPoint(string playerName) {
             PlayerScore playerScore = GetPlayerScore(playerName);
             playerScore.AddPoint();
         }
 
-        public string GetScore()
-        {
+        public string GetScore() {
             return scoreboard.GetScore();
         }
 
-        private PlayerScore GetPlayerScore(string playerName)
-        {
+        private PlayerScore GetPlayerScore(string playerName) {
             return player1Score.PlayerName.Equals(playerName) ? player1Score : player2Score;
         }
     }
-    public class Scoreboard
-    {
+
+    public class Scoreboard {
         private readonly PlayerScore player1Score;
         private readonly PlayerScore player2Score;
 
-        public Scoreboard(PlayerScore player1Score, PlayerScore player2Score)
-        {
+        public Scoreboard(PlayerScore player1Score, PlayerScore player2Score) {
             this.player2Score = player2Score;
             this.player1Score = player1Score;
         }
 
-        public string GetScore()
-        {
+        public string GetScore() {
             if (player1Score.Equals(player2Score))
                 return player1Score.GetScoreForEqual();
             if (player1Score.IsInLateGame() || player2Score.IsInLateGame())
@@ -49,25 +43,20 @@ namespace Tennis
         }
     }
 
-    public class PlayerScore
-    {
+    public class PlayerScore {
         private const int MinLateGamePoints = 4;
         private int value = 0;
         public string PlayerName { get; }
 
-        public PlayerScore(string playerName)
-        {
+        public PlayerScore(string playerName) {
             this.PlayerName = playerName;
         }
 
-
-        public string GetScoreForEarlyGame(PlayerScore other)
-        {
+        public string GetScoreForEarlyGame(PlayerScore other) {
             return $"{ConvertScoreToText(value)}-{ConvertScoreToText(other.value)}";
         }
 
-        public string GetScoreForLateGame(PlayerScore other)
-        {
+        public string GetScoreForLateGame(PlayerScore other) {
             var minusResult = value - other.value;
             if (minusResult == 1)  return "Advantage player1";
             if (minusResult == -1) return "Advantage player2";
@@ -75,26 +64,22 @@ namespace Tennis
             return "Win for player2";
         }
 
-        public string GetScoreForEqual()
-        {
+        public string GetScoreForEqual() {
             if (value == 0) return "Love-All";
             if (value == 1) return "Fifteen-All";
             if (value == 2) return "Thirty-All";
             return "Deuce";
         }
 
-        public void AddPoint()
-        {
+        public void AddPoint() {
             this.value += 1;
         }
 
-        public bool Equals(PlayerScore other)
-        {
+        public bool Equals(PlayerScore other) {
             return this.value == other.value;
         }
 
-        public bool IsInLateGame()
-        {
+        public bool IsInLateGame() {
             return this.value >= MinLateGamePoints;
         }
 
