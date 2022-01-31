@@ -6,9 +6,9 @@ namespace Tennis
         private readonly PlayerScore player2Score;
         private readonly Scoreboard scoreboard;
 
-        public TennisGame1() {
-            player1Score = new PlayerScore();
-            player2Score = new PlayerScore();
+        public TennisGame1(string player1Name, string player2Name) {
+            player1Score = new PlayerScore(player1Name);
+            player2Score = new PlayerScore(player2Name);
             scoreboard = new Scoreboard(player1Score, player2Score);
         }
 
@@ -49,6 +49,13 @@ namespace Tennis
     {
         private const int MinLateGamePoints = 4;
         private int value = 0;
+        public string PlayerName { get; }
+
+        public PlayerScore(string playerName)
+        {
+            this.PlayerName = playerName;
+        }
+
 
         public string GetScoreForEarlyGame(PlayerScore other)
         {
