@@ -12,16 +12,20 @@ namespace Tennis
             scoreboard = new Scoreboard(player1Score, player2Score);
         }
 
-        public void WonPoint(string playerName) {
-            if (playerName == "player1")
-                player1Score.AddPoint();
-            else
-                player2Score.AddPoint();
+        public void WonPoint(string playerName)
+        {
+            PlayerScore playerScore = GetPlayerScore(playerName);
+            playerScore.AddPoint();
         }
 
         public string GetScore()
         {
             return scoreboard.GetScore();
+        }
+
+        private PlayerScore GetPlayerScore(string playerName)
+        {
+            return player1Score.PlayerName.Equals(playerName) ? player1Score : player2Score;
         }
     }
     public class Scoreboard
