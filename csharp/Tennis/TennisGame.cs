@@ -1,6 +1,6 @@
 namespace Tennis
 {
-    public interface ITennisGame
+    public interface TennisGame
     {
         void WonPoint(string playerName);
         string GetScore();

@@ -75,7 +75,7 @@ namespace Tennis.Tests
             CheckAllScores(game, p1, p2, expected);
         }
 
-        private void CheckAllScores(ITennisGame game, int player1Score, int player2Score, string expectedScore)
+        private void CheckAllScores(TennisGame game, int player1Score, int player2Score, string expectedScore)
         {
             var highestScore = Math.Max(player1Score, player2Score);
             for (var i = 0; i < highestScore; i++)

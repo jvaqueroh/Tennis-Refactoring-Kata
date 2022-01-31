@@ -1,6 +1,6 @@
 namespace Tennis {
 
-    public class TennisGame1 : ITennisGame {
+    public class TennisGame1 : TennisGame {
         private readonly PlayerScore player1Score;
         private readonly PlayerScore player2Score;
         private readonly Scoreboard scoreboard;

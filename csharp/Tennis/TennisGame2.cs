@@ -1,6 +1,6 @@
 namespace Tennis
 {
-    public class TennisGame2 : ITennisGame
+    public class TennisGame2 : TennisGame
     {
         private int p1point;
         private int p2point;
